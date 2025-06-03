@@ -15,8 +15,8 @@ class VehicleTracker:
     def __init__(self, frame_rate=30):
         args = argparse.Namespace(
             track_thresh=0.5,
-            match_thresh=0.8,
-            track_buffer=30,
+            match_thresh=0.9,
+            track_buffer=90,
             frame_rate=frame_rate,
             mot20=False,
             aspect_ratio_thresh=1.6
