@@ -1,3 +1,6 @@
+# violation_checker.py
+# 금지구역 내 차량 정지 시간 추적 및 위반 판단 모듈
+
 import time
 
 NO_PARKING_ZONE = (809, 409, 859, 535)
@@ -28,7 +31,7 @@ class ViolationChecker:
         if not self.is_inside_zone(box):
             self.vehicle_status.pop(track_id, None)
             self.last_output[track_id] = None
-            return None
+            return None, 0.0  # ✅ 반드시 tuple로 반환
 
         info = self.vehicle_status.get(track_id)
         if info is None:
@@ -36,7 +39,7 @@ class ViolationChecker:
                 'last_center': curr_center,
                 'stopped_since': None
             }
-            return None
+            return None, 0.0  # ✅ 초기 등록 시도 시에도 튜플 반환
 
         prev_center = info['last_center']
         if self.is_stopped(prev_center, curr_center):
@@ -48,22 +51,21 @@ class ViolationChecker:
         info['last_center'] = curr_center
 
         if info['stopped_since'] is None:
-            return None
+            return None, 0.0
 
         stopped_sec = curr_time - info['stopped_since']
         print(f"[track {track_id}] stopped_sec={stopped_sec:.2f}")
 
-        # 상태 판단
-        if stopped_sec >= 5:
+        if stopped_sec >= 8:
             if self.last_output.get(track_id) != "violation":
-                print(f"❌ Vehicle {track_id} VIOLATION: over 5 sec → ticket sent")
+                print(f"❌ Vehicle {track_id} VIOLATION: over 8 sec → ticket sent")
                 self.last_output[track_id] = "violation"
-            return "violation"
-        elif stopped_sec >= 3:
+            return "violation", stopped_sec
+        elif stopped_sec >= 4:
             if self.last_output.get(track_id) != "warning":
-                print(f"⚠️ Vehicle {track_id} WARNING: over 3 sec stop")
+                print(f"⚠️ Vehicle {track_id} WARNING: over 4 sec stop")
                 self.last_output[track_id] = "warning"
-            return "warning"
+            return "warning", stopped_sec
         else:
             self.last_output[track_id] = None
-            return None
+            return None, stopped_sec
