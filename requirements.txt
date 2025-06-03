@@ -1,0 +1,13 @@
+opencv-python
+numpy
+matplotlib
+pillow
+torch
+torchvision
+ultralytics
+easyocr
+scikit-image
+filterpy
+deep-sort-realtime
+pandas
+tqdm
