@@ -92,14 +92,6 @@ AutoFine AI는 도로 위 **불법 주정차 차량을 인공지능으로 자동
 
 ---
 
-## 참고 및 라이선스
-
-- YOLOv8: [https://github.com/ultralytics/ultralytics](https://github.com/ultralytics/ultralytics)
-- ByteTrack: [https://github.com/ifzhang/ByteTrack](https://github.com/ifzhang/ByteTrack)
-- 본 프로젝트는 학술 목적/공공 목적의 테스트용으로 개발됨.
-
----
-
 ## 프로젝트 구조
 ```
 AutoFineAI/
@@ -128,8 +120,16 @@ AutoFineAI/
 
 --- 
 
+## 참고 및 라이선스
+
+- YOLOv8: [https://github.com/ultralytics/ultralytics](https://github.com/ultralytics/ultralytics)
+- ByteTrack: [https://github.com/ifzhang/ByteTrack](https://github.com/ifzhang/ByteTrack)
+- 본 프로젝트는 학술 목적/공공 목적의 테스트용으로 개발됨.
+
+---
+
+
 ## 프로젝트 정보
 
 - 작성일: 2025년 5월 30일    
 - 환경: Python, OpenCV, FFmpeg  
-
