@@ -26,7 +26,7 @@ AutoFine AI는 도로 위 **불법 주정차 차량을 자동 감지**하고, �
 ---
 
 ## 프로젝트 구조
-
+```
 AutoFineAI/
 ├── ByteTrack/ # 추적 알고리즘 서브모듈
 ├── data/
@@ -49,7 +49,7 @@ AutoFineAI/
 ├── car_simulation_creator.py # 차량 합성 시뮬레이터
 ├── yolov8n.pt # YOLOv8 모델 파일
 └── requirements.txt # 필요 라이브러리 목록
-
+```
 --- 
 
 ## ▶️ 실행 방법
