@@ -18,10 +18,7 @@ AutoFine AI는 도로 위 **불법 주정차 차량을 자동 감지**하고, �
 - ROI 기반 **위반 구역 감지**
 - 정차 시간 기준 위반 여부 판단
 - 차량 번호판 인식 (OCR) + 차종 분류 (CNN)
-- **위반 레벨(Level 1~3)** 자동 판단
-- 반복 위반 추적 및 시간대 분석
 - **티켓 이미지 자동 생성**
-- **불법 vs 정상 정차 영상 비교 출력**
 
 ---
 
@@ -31,7 +28,7 @@ AutoFineAI/
 ├── ByteTrack/ # 추적 알고리즘 서브모듈
 ├── data/
 │ ├── cctv.mp4 # 테스트용 CCTV 영상 (일반)
-│ ├── cctv_with_car.mp4 # 차량 포함 CCTV 영상
+│ ├── cctv_with_car.mp4 # 차량 포함 시뮬레이션 CCTV 영상
 │ ├── output_no_video.mp4 # 정상 주정차 영상 출력 예시
 │ ├── output_yes_video.mp4 # 위반 주정차 영상 출력 예시
 │ ├── ticket_template.png # 티켓 생성용 템플릿
@@ -45,8 +42,8 @@ AutoFineAI/
 ├── violation_checker.py # 정차 시간 및 ROI 체크
 ├── ticket_generator.py # 티켓 이미지 생성
 ├── click_roi_selector.py # ROI 구역 설정 GUI
-├── car_num.py # 번호판 인식 (OCR)
-├── car_simulation_creator.py # 차량 합성 시뮬레이터
+├── car_num.py # 자동차에 번호판 합성
+├── car_simulation_creator.py # CCTV 영상에 차량 합성 시뮬레이터
 ├── yolov8n.pt # YOLOv8 모델 파일
 └── requirements.txt # 필요 라이브러리 목록
 ```
@@ -59,8 +56,7 @@ pip install -r requirements.txt
 
 2. ROI(금지 구역) 설정
 python click_roi_selector.py
-
-→ 영상 프레임에서 마우스로 금지 구역을 지정한 뒤 저장하세요. 이 과정은 최초 한 번만 수행하면 됩니다.
+→ 영상 프레임에서 마우스로 금지 구역을 지정한 뒤 저장. 이 과정은 최초 한 번만 수행하면 됩니다.
 
 3. 메인 시스템 실행
 python main.py
@@ -76,16 +72,14 @@ python main.py
   </tr>
   <tr>
     <td>
-      <video width="320" controls>
-        <source src="data/output_no_video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+      <a href="data/output_no_video.mp4">
+        <img src="data/output_no_video_thumbnail.png" width="320" alt="정상 주정차 썸네일">
+      </a>
     </td>
     <td>
-      <video width="320" controls>
-        <source src="data/output_yes_video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+      <a href="data/output_yes_video.mp4">
+        <img src="data/output_yes_video_thumbnail.png" width="320" alt="위반 주정차 썸네일">
+      </a>
     </td>
   </tr>
 </table>
