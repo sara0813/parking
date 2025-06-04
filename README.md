@@ -22,36 +22,8 @@ AutoFine AI는 도로 위 **불법 주정차 차량을 인공지능으로 자동
 - **YOLOv8 차량 감지** + **ByteTrack 객체 추적**
 - ROI 기반 **위반 구역 감지**
 - 정차 시간 기준 위반 여부 판단
-- 차량 번호판 인식 (OCR) + 차종 분류 (CNN)
 - **티켓 이미지 자동 생성**
 
----
-
-## 프로젝트 구조
-```
-AutoFineAI/
-├── ByteTrack/ # 추적 알고리즘 서브모듈
-├── data/
-│ ├── cctv.mp4 # 테스트용 CCTV 영상 (일반)
-│ ├── cctv_with_car.mp4 # 차량 포함 시뮬레이션 CCTV 영상
-│ ├── output_no_video.mp4 # 정상 주정차 영상 출력 예시
-│ ├── output_yes_video.mp4 # 위반 주정차 영상 출력 예시
-│ ├── ticket_template.png # 티켓 생성용 템플릿
-│ └── 기타 리소스 이미지
-├── tickets/
-│ ├── ticket_ex.png # 티켓 출력 예시 이미지
-│ └── ticket_*.png # 실제 실행 시 생성되는 티켓들
-├── main.py # 메인 실행 파일
-├── detector.py # YOLO 기반 차량 탐지 모듈
-├── tracker.py # ByteTrack 추적 모듈
-├── violation_checker.py # 정차 시간 및 ROI 체크
-├── ticket_generator.py # 티켓 이미지 생성
-├── click_roi_selector.py # ROI 구역 설정 GUI
-├── car_num.py # 자동차에 번호판 합성
-├── car_simulation_creator.py # CCTV 영상에 차량 합성 시뮬레이터
-├── yolov8n.pt # YOLOv8 모델 파일
-└── requirements.txt # 필요 라이브러리 목록
-```
 --- 
 
 ## 실행 방법
@@ -127,6 +99,34 @@ AutoFineAI/
 - 본 프로젝트는 학술 목적/공공 목적의 테스트용으로 개발됨.
 
 ---
+
+## 프로젝트 구조
+```
+AutoFineAI/
+├── ByteTrack/ # 추적 알고리즘 서브모듈
+├── data/
+│ ├── cctv.mp4 # 테스트용 CCTV 영상 (일반)
+│ ├── cctv_with_car.mp4 # 차량 포함 시뮬레이션 CCTV 영상
+│ ├── output_no_video.mp4 # 정상 주정차 영상 출력 예시
+│ ├── output_yes_video.mp4 # 위반 주정차 영상 출력 예시
+│ ├── ticket_template.png # 티켓 생성용 템플릿
+│ └── 기타 리소스 이미지
+├── tickets/
+│ ├── ticket_ex.png # 티켓 출력 예시 이미지
+│ └── ticket_*.png # 실제 실행 시 생성되는 티켓들
+├── main.py # 메인 실행 파일
+├── detector.py # YOLO 기반 차량 탐지 모듈
+├── tracker.py # ByteTrack 추적 모듈
+├── violation_checker.py # 정차 시간 및 ROI 체크
+├── ticket_generator.py # 티켓 이미지 생성
+├── click_roi_selector.py # ROI 구역 설정 GUI
+├── car_num.py # 자동차에 번호판 합성
+├── car_simulation_creator.py # CCTV 영상에 차량 합성 시뮬레이터
+├── yolov8n.pt # YOLOv8 모델 파일
+└── requirements.txt # 필요 라이브러리 목록
+```
+
+--- 
 
 ## 프로젝트 정보
 
