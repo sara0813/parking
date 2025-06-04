@@ -59,13 +59,23 @@ AutoFineAI/
 1. 가상환경 활성화 후 필요한 라이브러리 설치:
 ```bash pip install -r requirements.txt```
 
-2. ROI(금지 구역) 설정
-python click_roi_selector.py
+2. ROI(불법 주정차 금지 구역) 설정:
+```bash python click_roi_selector.py```
 → 영상 프레임에서 마우스로 금지 구역을 지정한 뒤 저장. 이 과정은 최초 한 번만 수행하면 됩니다.
 
-3. 메인 시스템 실행
+3. 메인 시스템 실행:
 ```bash python main.py ```
 → 영상이 재생되며, 위반 차량이 감지되면 tickets/ 폴더에 티켓이 자동 저장됩니다.
+
+---
+
+## 데모 시나리오
+
+1. 사용자가 CCTV 영상에서 ROI(불법 주정차 금지 구역)를 지정한다.
+2. 차량이 해당 구역에 일정 시간 이상 정차하면 시스템이 이를 자동 감지한다.
+3. 감지된 차량의 정차 시간과 침범 위치를 분석하여 위반 여부를 판단한다.
+4. 정차 시간이 **3초 이상일 경우 경고 메시지**, **8초 이상일 경우 불법 주정차 메시지**를 출력한다.
+5. 위반 차량에 대해 티켓 이미지를 자동 생성하여 저장한다.
 
 ---
 
@@ -93,16 +103,33 @@ python click_roi_selector.py
 
 ## 티켓 출력 예시
 
-출력 경로: `tickets/`
+- **출력 위치**: `tickets/` 폴더  
+- **생성 시점**: 불법 주정차 위반이 감지될 때마다(주청자구역에 8초 이상 주차 시) 자동 생성  
+- **저장 형식**: `.png` 이미지  
+- **기반 템플릿**: `data/ticket_template.png`
 
-티켓은 위반 시마다 자동 생성되며, `data/ticket_template.png` 템플릿을 기반으로 구성되고 PNG 이미지로 저장됩니다.
+각 티켓은 다음 정보를 포함하여 시각적으로 정리된 형태로 출력됩니다:
+- 차량 ID  
+- 정차 시간  
+- 위반 발생 시간  
 
-- 템플릿: ![티켓 템플릿](data/ticket_template.png)  
-- 예시: ![티켓 예시](tickets/ticket_ex.png)
-
---
-
+| 템플릿 이미지 | 생성된 티켓 예시 |
+|:--:|:--:|
+| ![티켓 템플릿](data/ticket_template.png) | ![티켓 예시](tickets/ticket_ex.png) |
 
 
-## 작성일
-2025년 5월 30일
+---
+
+## 참고 및 라이선스
+
+- YOLOv8: [https://github.com/ultralytics/ultralytics](https://github.com/ultralytics/ultralytics)
+- ByteTrack: [https://github.com/ifzhang/ByteTrack](https://github.com/ifzhang/ByteTrack)
+- 본 프로젝트는 학술 목적/공공 목적의 테스트용으로 개발됨.
+
+---
+
+## 프로젝트 정보
+
+- 작성일: 2025년 5월 30일    
+- 환경: Python, OpenCV, FFmpeg  
+
